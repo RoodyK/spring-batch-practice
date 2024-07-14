@@ -1,0 +1,12 @@
+services:
+  mysql:
+    container_name: batch_test
+    image: mysql/mysql-server:8.0.28
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: "batch"
+      MYSQL_DATABASE: "batch_test"
+      MYSQL_USER: "batch"
+      MYSQL_PASSWORD: "batch"
+    ports:
+      - "3306:3306"

@@ -1,0 +1,50 @@
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  profiles:
+    active: local
+
+  batch:
+    job:
+      names: ${job.name:NONE}
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/batch_test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: batch
+    password: batch
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+
+  batch:
+    jdbc:
+      initialize-schema: always
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  jpa:
+    database: h2
