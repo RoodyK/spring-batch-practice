@@ -1,3 +1,4 @@
+
 package hello.spring.batch.config;
 
 import lombok.RequiredArgsConstructor;
@@ -8,8 +9,10 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,26 +24,29 @@ public class HelloJobConfig {
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job helloJob(Step helloStep) {
+    public Job helloJob() {
         return jobBuilderFactory.get("helloJob")
-                .start(helloStep)
+                //.incrementer(new RunIdIncrementer()) // JobParameters 고유한 run.id 값 지정
+                .start(helloStep())
                 .build();
     }
 
     @JobScope
     @Bean
-    public Step helloStep(Tasklet helloTasklet) {
+    public Step helloStep() {
         return stepBuilderFactory.get("helloStep")
-                .tasklet(helloTasklet)
+                .tasklet(helloTasklet(null))
                 .build();
     }
 
     @StepScope
     @Bean
-    public Tasklet helloTasklet() {
+    public Tasklet helloTasklet(@Value("#{jobParameters[batchDate]}") String batchDate) {
         return (stepContribution, chunkContext) -> {
             log.info("[helloTasklet] start");
+            log.info("[helloTasklet] jobParameters.batchDate = {}", batchDate);
             return RepeatStatus.FINISHED;
         };
     }
 }
+
