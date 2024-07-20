@@ -1,5 +1,5 @@
 
-package hello.spring.batch.config;
+package hello.spring.batch.job.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
