@@ -9,11 +9,15 @@ spring:
   batch:
     job:
       names: ${job.name:NONE}
+#      parameters:
+#        batch-date: '2020-01-01'
 
 logging:
   level:
+#    org.springframework.batch: debug
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
+
 ---
 
 spring:
