@@ -1,5 +1,6 @@
 package hello.spring.batch.job.config;
 
+import hello.spring.batch.job.constant.MyStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,11 +16,11 @@ public class DateConvertParameter {
      * 생성자 방식
      */
     private LocalDate batchDate;
-    private MyState myState;
+    private MyStatus myStatus;
 
-    public DateConvertParameter(String batchDate, MyState myState) {
+    public DateConvertParameter(String batchDate, MyStatus myStatus) {
         this.batchDate = LocalDate.parse(batchDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.myState = myState;
+        this.myStatus = myStatus;
     }
 
     /**
@@ -34,20 +35,5 @@ public class DateConvertParameter {
 //        this.batchDate = LocalDate.parse(batchDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 //    }
 
-    @NoArgsConstructor
-    @Getter
-    public enum MyState {
-        BLOG, REST, WORK;
-
-        public void checkState(String myState) {
-            for (MyState value : MyState.values()) {
-                if (value.name().equals(myState)) {
-                    return;
-                }
-            }
-
-            throw new IllegalArgumentException("잘못된 상태입니다.");
-        }
-    }
 }
 

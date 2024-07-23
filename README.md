@@ -11,3 +11,4 @@ hello.spring.batch.job 패키지 하위에 배치 관련 로직을 작성
 - [스프링 배치 개념 및 사용](https://dawncode.tistory.com/9)
 - [스프링 배치 메타데이터 스키마](https://dawncode.tistory.com/10)
 - [스프링 배치 Chunk Oriented Processing](https://dawncode.tistory.com/11)
+- [JobParameters와 검증(JobParametersValidator)](https://dawncode.tistory.com/12)

@@ -1,6 +1,7 @@
 package hello.spring.batch.job.validator;
 
 import hello.spring.batch.job.config.DateConvertParameter;
+import hello.spring.batch.job.constant.MyStatus;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.JobParametersValidator;
@@ -19,7 +20,7 @@ public class MyStateValidator implements JobParametersValidator {
         }
 
         try {
-            DateConvertParameter.MyState.valueOf(myState);
+            MyStatus.valueOf(myState);
         } catch (IllegalArgumentException e) {
             throw new JobParametersInvalidException("상태를 다시 확인하세요");
         }

@@ -1,6 +1,7 @@
 
 package hello.spring.batch.job.config;
 
+import hello.spring.batch.job.constant.MyStatus;
 import hello.spring.batch.job.validator.BatchDateValidator;
 import hello.spring.batch.job.validator.MyStateValidator;
 import lombok.RequiredArgsConstructor;
@@ -34,10 +35,10 @@ public class HelloJobConfig {
     @Bean
     @JobScope
     public DateConvertParameter customParameter(
-            @Value("#{jobParameters[myState]}") DateConvertParameter.MyState myState,
+            @Value("#{jobParameters[myState]}") MyStatus myStatus,
             @Value("#{jobParameters[batchDate]}") String batchDate
     ) {
-        return new DateConvertParameter(batchDate, myState);
+        return new DateConvertParameter(batchDate, myStatus);
     }
 
     // JobParameters Setter 주입을 빈 생성 및 스코프 지정
@@ -83,7 +84,7 @@ public class HelloJobConfig {
             log.info("[helloTasklet] start");
             log.info("[helloTasklet] jobParameters.batchDate = {}", batchDate);
             log.info("[helloTasklet] jobParameters.batchDate = {}", jobParameter.getBatchDate());
-            log.info("[helloTasklet] jobParameters.myState = {}", jobParameter.getMyState());
+            log.info("[helloTasklet] jobParameters.myState = {}", jobParameter.getMyStatus());
             return RepeatStatus.FINISHED;
         };
     }
