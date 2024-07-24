@@ -3,7 +3,7 @@ package hello.spring.batch.job.config;
 
 import hello.spring.batch.job.constant.MyStatus;
 import hello.spring.batch.job.validator.BatchDateValidator;
-import hello.spring.batch.job.validator.MyStateValidator;
+import hello.spring.batch.job.validator.MyStatusValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -61,7 +61,7 @@ public class HelloJobConfig {
         CompositeJobParametersValidator validator = new CompositeJobParametersValidator();
         validator.setValidators(Arrays.asList(
                 new BatchDateValidator(),
-                new MyStateValidator()
+                new MyStatusValidator()
         ));
 
         return validator;
